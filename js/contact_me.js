@@ -20,7 +20,7 @@ $(function() {
       $this = $("#sendMessageButton");
       //$this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
         var subject = 'C\'est ' + name + ' qui te parle mon Beu';
-        var body = 'Salut c\'est ' + name + '%0D%0A' + message;
+        var body = 'Salut c\'est ' + name + '%0D%0A' + message + '%0D%0A';
         var caseEnd = Math.floor(Math.random() * Math.floor(3));
         switch (caseEnd)
         {
