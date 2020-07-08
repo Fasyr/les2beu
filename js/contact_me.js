@@ -18,45 +18,27 @@ $(function() {
         firstName = name.split(' ').slice(0, -1).join(' ');
       }
       $this = $("#sendMessageButton");
-      $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-      $.ajax({
-        url: "././mail/contact_me.php",
-        type: "POST",
-        data: {
-          name: name,
-          phone: phone,
-          email: email,
-          message: message
-        },
-        cache: false,
-        success: function() {
-          // Success message
-          $('#success').html("<div class='alert alert-success'>");
-          $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            .append("</button>");
-          $('#success > .alert-success')
-            .append("<strong>Your message has been sent. </strong>");
-          $('#success > .alert-success')
-            .append('</div>');
-          //clear all fields
-          $('#contactForm').trigger("reset");
-        },
-        error: function() {
-          // Fail message
-          $('#success').html("<div class='alert alert-danger'>");
-          $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            .append("</button>");
-          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
-          $('#success > .alert-danger').append('</div>');
-          //clear all fields
-          $('#contactForm').trigger("reset");
-        },
-        complete: function() {
-          setTimeout(function() {
-            $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-          }, 1000);
+      //$this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+        var subject = 'C\'est ' + name + ' qui te parle mon Beu';
+        var body = 'Salut c\'est ' + name + '%0D%0A' + message;
+        var caseEnd = Math.floor(Math.random() * Math.floor(3));
+        switch (caseEnd)
+        {
+            case '0':
+                body = body.concat('\n A plus dans le bus mon Beu %0D%0A mon phone ' + phone);
+                break;
+            case '1':
+                body = body.concat( '\n A bientot dans le métro mon Beu %0D%0A mon phone ' + phone);
+                break;
+            case '2':
+                body = body.concat( '\n A un de ces quatre dans le 4x4 mon Beu %0D%0A mon phone ' + phone);
+                break;
+            default:
+                body = body.concat( '\n A plus dans le bus mon Beu %0D%0A mon phone ' + phone);
+                break;
         }
-      });
+
+      window.open('mailto:contact@les2beu.fr?subject='+subject+'&body='+body);
     },
     filter: function() {
       return $(this).is(":visible");
