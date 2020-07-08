@@ -18,19 +18,19 @@ $(function() {
         firstName = name.split(' ').slice(0, -1).join(' ');
       }
       $this = $("#sendMessageButton");
-      //$this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+      $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
         var subject = 'C\'est ' + name + ' qui te parle mon Beu';
         var body = 'Salut c\'est ' + name + '%0D%0A' + message + '%0D%0A';
         var caseEnd = Math.floor(Math.random() * Math.floor(3));
         switch (caseEnd)
         {
-            case '0':
+            case 0:
                 body = body.concat('\n A plus dans le bus mon Beu %0D%0A mon phone ' + phone);
                 break;
-            case '1':
+            case 1:
                 body = body.concat( '\n A bientot dans le métro mon Beu %0D%0A mon phone ' + phone);
                 break;
-            case '2':
+            case 2:
                 body = body.concat( '\n A un de ces quatre dans le 4x4 mon Beu %0D%0A mon phone ' + phone);
                 break;
             default:
